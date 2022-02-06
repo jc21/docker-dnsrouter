@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${DIR}/.."
+
+export IMAGE=dnsrouter
+export BASE_TAG=latest
+export DNSROUTER_VERSION=0.0.6
+
+./scripts/buildx --push -f docker/Dockerfile -t docker.io/jc21/${IMAGE}:${BASE_TAG}

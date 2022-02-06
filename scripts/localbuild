@@ -1,0 +1,19 @@
+#!/bin/bash -e
+
+BLUE='\E[1;34m'
+GREEN='\E[1;32m'
+RESET='\E[0m'
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${DIR}/.."
+
+export DNSROUTER_VERSION=0.0.6
+
+docker build \
+	--pull \
+	--build-arg DNSROUTER_VERSION \
+	-t dnsrouter:dev \
+	-f docker/Dockerfile \
+	.
+
+echo -e "${BLUE}❯ ${GREEN}Build Complete${RESET}"
