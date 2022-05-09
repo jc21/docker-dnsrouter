@@ -1,0 +1,30 @@
+#!/bin/bash -e
+
+BLUE='\E[1;34m'
+CYAN='\E[1;36m'
+YELLOW='\E[1;33m'
+RESET='\E[0m'
+
+export GOOS=linux
+
+# Determine the correct binary file for the architecture given
+case ${TARGETPLATFORM:-linux/amd64} in
+	linux/arm64)
+		export GOARCH=arm64
+		;;
+
+	linux/arm/v7)
+		export GOARCH=arm
+		;;
+
+	*)
+		export GOARCH=amd64
+		;;
+esac
+
+echo -e "${BLUE}❯ ${CYAN}Building binary for ${YELLOW}${GOARCH} (${TARGETPLATFORM})${RESET}"
+
+go build \
+	-ldflags "-w -s -X main.version=${DNSROUTER_VERSION}" \
+	-o /workspace/dnsrouter \
+	./cmd/dnsrouter

@@ -5,6 +5,7 @@ FROM jc21/gotools:latest AS gobuild
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG DNSROUTER_VERSION
+ARG TARGETPLATFORM
 
 ENV DNSROUTER_VERSION="${DNSROUTER_VERSION:-0.0.0}" \
 	GO111MODULE=on
@@ -14,10 +15,9 @@ WORKDIR /workspace
 RUN wget "https://github.com/jc21/dnsrouter/archive/refs/tags/v${DNSROUTER_VERSION}.tar.gz" -O dnsrouter.tgz
 RUN tar -xzf dnsrouter.tgz
 WORKDIR /workspace/dnsrouter-${DNSROUTER_VERSION}
-RUN go build \
-	-ldflags "-w -s -X main.version=${DNSROUTER_VERSION}" \
-	-o /workspace/dnsrouter \
-	./cmd/dnsrouter
+
+COPY scripts/gobuild /gobuild
+RUN /gobuild
 
 #############
 # Final Image
@@ -28,6 +28,9 @@ LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 
 COPY --from=gobuild /workspace/dnsrouter /dnsrouter
 COPY files/dnsrouter-config.json /dnsrouter-config.json
+
+# test the comand
+RUN exec /dnsrouter --help
 
 EXPOSE 53/udp
 EXPOSE 53/tcp
