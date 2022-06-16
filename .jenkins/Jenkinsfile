@@ -11,7 +11,7 @@ pipeline {
 		IMAGE             = 'dnsrouter'
 		BUILDX_NAME       = "${IMAGE}_${GIT_BRANCH}"
 		BRANCH_LOWER      = "${BRANCH_NAME.toLowerCase().replaceAll('/', '-')}"
-		DNSROUTER_VERSION = '0.0.6'
+		DNSROUTER_VERSION = '0.0.7'
 	}
 	stages {
 		stage('Environment') {

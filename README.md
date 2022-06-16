@@ -1,7 +1,7 @@
 # dnsrouter
 
 <p>
-  <img src="https://img.shields.io/badge/dnsrouter-0.0.6-green.svg?style=for-the-badge">
+  <img src="https://img.shields.io/badge/dnsrouter-0.0.7-green.svg?style=for-the-badge">
   <a href="https://hub.docker.com/repository/docker/jc21/dnsrouter">
     <img src="https://img.shields.io/docker/stars/jc21/dnsrouter.svg?style=for-the-badge">
   </a>
