@@ -23,7 +23,7 @@ RUN /gobuild
 # Final Image
 #############
 
-FROM debian:buster-slim
+FROM debian:bookworm-slim
 LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 
 COPY --from=gobuild /workspace/dnsrouter /dnsrouter
