@@ -5,6 +5,6 @@ cd "${DIR}/.."
 
 export IMAGE=dnsrouter
 export BASE_TAG=latest
-export DNSROUTER_VERSION=0.0.7
+export DNSROUTER_VERSION=0.0.9
 
 ./scripts/buildx --push -f docker/Dockerfile -t docker.io/jc21/${IMAGE}:${BASE_TAG}
